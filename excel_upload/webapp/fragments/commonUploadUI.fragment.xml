@@ -1,0 +1,76 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" displayBlock="true" xmlns:m="sap.m" class="sapUiSizeCompact" xmlns="sap.ui.table" xmlns:u="sap.ui.unified">
+    <m:FlexBox id="idFlexBox" justifyContent="Center" alignContent="Center">
+        <m:CheckBox id="idChkBox" text="{i18n>testRun}" select="handleSelect" class="sapUiSmallMarginEnd" />
+        <u:FileUploader
+            id="idFileUploader"
+            change="onUploadChange"
+            name="myFileUpload"
+            tooltip="{i18n>fileUploaderTooltip}"
+            placeholder="{i18n>fileUploaderPlaceHolder}"
+            uploadComplete="handleUploadComplete"
+            uploadStart="onBeforeUploadStarts"
+            useMultipart="false"
+            sendXHR="true"
+            fileType="csv,xlsx"
+        />        
+    </m:FlexBox>
+    <Table id="exportTable" rows="{EXCEL_RESULTS_MODEL>/}" selectionMode="None">   
+        <extension>
+            <m:OverflowToolbar id="idOTB1">
+                <m:Title id="idTblTitle" text="{i18n>tblTitle}" />
+                <m:ToolbarSpacer id="idTS"/>
+                <m:Button id="idExportBut" icon="sap-icon://excel-attachment" tooltip="Export Data" press="onExport" />
+            </m:OverflowToolbar>
+        </extension>     
+        <columns>
+            <Column id="idColCustNo" sortProperty="PARTNER" filterProperty="PARTNER" defaultFilterOperator="EQ">
+                <m:Label id="idLabelCustomerNo" text="{i18n>customerNo}" />
+                <template>
+                    <m:Text id="idTextCustomerNo" text="{EXCEL_RESULTS_MODEL>PARTNER}" wrapping="false" />
+                </template>
+            </Column>
+            <Column id="idColRating">
+                <m:Label id="idLabelRating" text="{i18n>rating}" />
+                <template>
+                    <m:Text id="idTextRating" text="{EXCEL_RESULTS_MODEL>GRADE_METHOD}" wrapping="false" />
+                </template>
+            </Column>
+            <Column id="idColRatingPoints">
+                <m:Label id="idLabelRatingPoints" text="{i18n>ratingPoints}" />
+                <template>
+                    <m:Text id="idTextRatingPoints" text="{EXCEL_RESULTS_MODEL>GRADE}" wrapping="false" />
+                </template>
+            </Column>
+            <Column id="idColTendency">
+                <m:Label id="idLabelTendency" text="{i18n>tendency}" />
+                <template>
+                    <m:Text id="idTextTendency" text="{EXCEL_RESULTS_MODEL>TENDENCY}" wrapping="false" />
+                </template>
+            </Column>
+            <Column id="idColID">
+                <m:Label id="idLabelid" text="{i18n>id}" />
+                <template>
+                    <m:Text id="idTextid" text="{EXCEL_RESULTS_MODEL>ID}" wrapping="false" />
+                </template>
+            </Column>
+            <Column id="idColResultText">
+                <m:Label id="idLabelResultText" text="{i18n>text}" />
+                <template>
+                    <m:Text id="idTextResultText" text="{EXCEL_RESULTS_MODEL>TEXT}" wrapping="false" />
+                </template>
+            </Column>
+            <Column id="idColStatus" sortProperty="RUNSTATUS" filterProperty="RUNSTATUS">
+                <m:Label id="idLabelStatus" text="{i18n>status}"  />
+                <template>
+                    <m:Text id="idTextStatus" text="{EXCEL_RESULTS_MODEL>RUNSTATUS}" wrapping="false" />
+                </template>
+            </Column>
+            <Column id="idColMsg">
+                <m:Label id="idLabelMessage" text="{i18n>message}" />
+                <template>
+                    <m:Text id="idTextMessage" text="{EXCEL_RESULTS_MODEL>RUNMSG}" wrapping="false" />
+                </template>
+            </Column>
+        </columns>
+    </Table>
+</core:FragmentDefinition>

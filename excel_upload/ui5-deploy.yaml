@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "2.5"
+metadata:
+  name: excelupload
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          destination: bass4h
+          url: http://bass4hdev.sap.lambweston.com:443
+        app:
+          name: ZRTREXCELUPLOAD
+          description: Deploying to ABAP Repository RTR_E2001
+          package: ZRTR
+          transport: S4EK901431
